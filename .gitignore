@@ -3,7 +3,6 @@ out
 build
 *.avsc
 *.swp
-*.java
 checkpoint
 *.log
 ignore
@@ -36,7 +35,7 @@ shared/.jvm
 *.orig
 *.sc
 
-# eclipse
+# eclpse
 .scala_dependencies
 .buildpath
 .target
