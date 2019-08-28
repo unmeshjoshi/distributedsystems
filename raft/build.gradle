@@ -1,0 +1,39 @@
+import com.github.jengelman.gradle.plugins.shadow.transformers.AppendingTransformer
+
+apply plugin: 'scala'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+def scalaVersion = '2.12'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
+    }
+}
+
+repositories {
+    mavenCentral()
+ }
+
+dependencies {
+    compile group: 'org.scala-lang', name: 'scala-library', version: '2.12.1'
+    testCompile group: "org.scalatest", name: "scalatest_$scalaVersion", version: "3.0.0"
+    compile group: "org.scala-lang.modules", name: "scala-async_$scalaVersion", version: "0.9.6"
+    compile group: "org.iq80.leveldb", name: "leveldb", version: "0.9"
+    compile group: "org.fusesource.leveldbjni", name: "leveldbjni-all", version: "1.8"
+    compile group: 'org.zeromq', name: 'jeromq', version: '0.3.6'
+    compile group: 'com.typesafe.scala-logging', name: 'scala-logging-slf4j_2.11', version: '2.1.2'
+
+
+}
+
+task classpath << { println sourceSets.main.runtimeClasspath.asPath }
+
+shadowJar {
+    transform(AppendingTransformer) {
+        resource = 'reference.conf'
+    }
+}
